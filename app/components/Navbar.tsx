@@ -1,88 +1,83 @@
 "use client";
 
+import { JSX } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ROUTES, ROUTE_MAP } from "../constants";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+} from "@/components/ui/breadcrumb";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navigation = Object.entries(ROUTE_MAP);
 
-const Navbar = () => {
+const Navbar = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  const isActive = (route: string) => (pathname === route ? "page" : undefined);
+  const isActive = (route: string): string => {
+    return pathname === route ? "border-b border-white" : "";
+  };
 
-  const closeMenu = () => setIsOpen(false);
+  const closeMenu = (): void => setIsOpen(false);
 
   return (
-    <header className="relative z-50 border-b border-gray-200 bg-black">
-      <nav aria-label="Main navigation" className="mx-auto max-w-6xl px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link
-            href={ROUTES.HOME}
-            onClick={closeMenu}
-            className="rounded text-xl font-bold md:text-3xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-          >
-            Dan Silva | Portfolio
-          </Link>
-
-          {/* Desktop navigation */}
-          <ul className="hidden items-center gap-6 md:flex">
-            {navigation.map(([route, { label }]) => (
-              <li key={route}>
-                <Link
-                  href={route}
-                  aria-current={isActive(route)}
-                  className="rounded hover:text-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 md:text-2xl"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isOpen}
-            aria-controls="mobile-navigation"
-            onClick={() => setIsOpen((prev) => !prev)}
-            className="rounded-md p-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 md:hidden"
-          >
-            <span aria-hidden="true" className="text-2xl">
-              {isOpen ? "✕" : "☰"}
-            </span>
-          </button>
-        </div>
-
-        {/* Mobile navigation */}
-        <div
-          id="mobile-navigation"
-          inert={!isOpen}
-          className={`absolute top-full right-0 left-0 overflow-hidden border-b border-gray-200 bg-black shadow-lg transition-[opacity,transform,visibility] duration-300 ease-in-out motion-reduce:transition-none md:hidden ${
-            isOpen
-              ? "visible translate-y-0 opacity-100"
-              : "invisible -translate-y-4 opacity-0"
-          }`}
-        >
-          <ul className="mx-auto max-w-6xl space-y-1 px-4 py-4">
-            {navigation.map(([route, { label }]) => (
-              <li key={route}>
-                <Link
-                  href={route}
-                  aria-current={isActive(route)}
+    <header className="relative z-50 border-b border-gray-200 flex flex-row items-center justify-between p-4 font-bold">
+      <h2 className="text-2xl">
+        <Link href={ROUTES.HOME}>Dan Silva | SWE</Link>
+      </h2>
+      <Breadcrumb className="hidden md:flex">
+        <BreadcrumbList>
+          {navigation.map(([route, { label }]) => (
+            <BreadcrumbItem key={route}>
+              <BreadcrumbLink
+                className={`${isActive(route)} text-white text-lg`}
+                render={<Link href={route}>{label}</Link>}
+              />
+            </BreadcrumbItem>
+          ))}
+        </BreadcrumbList>
+      </Breadcrumb>
+      <div className="md:hidden">
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            render={
+              <Button onClick={() => setIsOpen(!isOpen)}>
+                {isOpen ? <X /> : <Menu />}
+              </Button>
+            }
+          />
+          <DropdownMenuContent className="bg-black text-white border-none">
+            <DropdownMenuGroup>
+              {navigation.map(([route, { label }]) => (
+                <DropdownMenuItem
+                  key={route}
                   onClick={closeMenu}
-                  className="block rounded-md px-3 py-3 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                  className="text-md"
                 >
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+                  <Link href={route} className="w-full">
+                    {label}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </header>
   );
 };

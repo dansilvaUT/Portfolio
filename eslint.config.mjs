@@ -8,12 +8,12 @@ const eslintConfig = defineConfig([
   ...nextTs,
   prettier,
   // Override default ignores of eslint-config-next.
-  globalIgnores([
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  {
+    rules: {
+      "@typescript-eslint/explicit-function-return-type": "error",
+    },
+  },
 ]);
 
 export default eslintConfig;

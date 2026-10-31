@@ -1,5 +1,6 @@
+import { JSX } from "react";
 import type { Metadata } from "next";
-import { Nunito, Geist, Geist_Mono } from "next/font/google";
+import { Nunito, Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 
@@ -18,7 +19,9 @@ export const metadata: Metadata = {
   description: "Dan Silva's personal portfolio",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: LayoutProps<"/">): JSX.Element {
   return (
     <html
       lang="en"
