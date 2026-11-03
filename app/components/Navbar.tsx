@@ -45,7 +45,7 @@ const Navbar = (): JSX.Element => {
           {navigation.map(([route, { label }]) => (
             <BreadcrumbItem key={route}>
               <BreadcrumbLink
-                className={`${isActive(route)} text-white text-lg`}
+                className={`${isActive(route)} text-white text-lg mx-3`}
                 render={<Link href={route}>{label}</Link>}
               />
             </BreadcrumbItem>

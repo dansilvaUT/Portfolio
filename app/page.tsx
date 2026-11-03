@@ -1,4 +1,6 @@
-const HomePage = () => {
+import type { JSX } from "react";
+
+const HomePage = (): JSX.Element => {
   return (
     <section
       aria-labelledby="intro-heading"
@@ -15,7 +17,7 @@ const HomePage = () => {
         Front-End Developer
       </p>
 
-      <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-600 md:mt-8 md:text-xl lg:text-2xl">
+      <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-200 md:mt-8 md:text-xl lg:text-2xl">
         I&apos;m passionate about turning ideas into meaningful digital
         experiences that make a difference. I enjoy solving complex problems and
         creating intuitive, engaging applications that people love to use.
