@@ -2,7 +2,7 @@ import { JSX } from "react";
 import type { Metadata } from "next";
 import { Nunito, Geist } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import { Navbar } from "./components";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +27,13 @@ export default function RootLayout({
       lang="en"
       className={`${nunito.variable} ${geistSans.variable} h-full antialiased`}
     >
+      <head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-black">
         <Navbar />
         <main>{children}</main>
