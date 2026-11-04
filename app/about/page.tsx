@@ -2,7 +2,7 @@ import { JSX } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Skills from "../components/Skills";
 
-const page = (): JSX.Element => {
+const Page = (): JSX.Element => {
   return (
     <section className="size-full flex flex-col items-center justify-center text-white p-6 space-y-6">
       <Avatar className="w-40 h-40 border-2 border-white">
@@ -48,4 +48,4 @@ const page = (): JSX.Element => {
   );
 };
 
-export default page;
+export default Page;
