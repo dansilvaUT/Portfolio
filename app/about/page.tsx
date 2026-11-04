@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { JSX, useId } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Skills from "../components/Skills";
 
@@ -7,7 +7,7 @@ const Page = (): JSX.Element => {
     <section className="size-full flex flex-col items-center justify-center text-white p-6 space-y-6">
       <Avatar className="w-40 h-40 border-2 border-white">
         <AvatarImage
-          src={`https://robohash.org/${Math.random()}`}
+          src={`https://robohash.org/${useId()}`}
           alt="Dan Silva Photo"
           className="grayscale"
         />

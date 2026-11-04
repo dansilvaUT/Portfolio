@@ -20,8 +20,8 @@ const Page = (): JSX.Element => {
   });
 
   return (
-    <section className="size-full flex flex-col items-center justify-center text-white p-6 space-y-6">
-      <h1 className="text-5xl font-bold align-middle">Contact</h1>
+    <section className="size-full md:w-full flex flex-col text-white p-6">
+      <h1 className="text-5xl font-bold text-center">Contact</h1>
       <form>
         <FieldGroup>
           <Field>
@@ -38,7 +38,7 @@ const Page = (): JSX.Element => {
           </Field>
           <Textarea placeholder="Type your message here." />
           <Field orientation="horizontal">
-            <Button type="reset" variant="outline">
+            <Button type="reset" variant="secondary">
               Reset
             </Button>
             <Button type="submit">Submit</Button>
